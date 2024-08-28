@@ -58,4 +58,14 @@ public class TodoService {
         todo.update(requestDto.getUserName(), requestDto.getTodoTitle(), requestDto.getTodoContents());
         return new TodoUpdateResponseDto(todo.getId(), todo.getUserName(), todo.getTodoTitle(), todo.getTodoContents());
     }
+
+    //일정 삭제
+    @Transactional
+    public void deleteTodo(Long todoId) {
+        if (!todoRepository.existsById(todoId)) {
+            throw new NullPointerException("해당 일정이 없습니다.");
+        }
+
+        todoRepository.deleteById(todoId);
+    }
 }

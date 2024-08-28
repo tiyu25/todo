@@ -42,4 +42,10 @@ public class TodoController {
         return ResponseEntity.ok(todoService.updateTodo(todoId, requestDto));
     }
 
+    //일정 삭제
+    @DeleteMapping("/param")
+    public void deleteTodo(@RequestParam Long todoId) {
+        todoService.deleteTodo(todoId);
+    }
+
 }
