@@ -1,4 +1,4 @@
-package com.sparta.todo.entity;
+package com.sparta.todo.todo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

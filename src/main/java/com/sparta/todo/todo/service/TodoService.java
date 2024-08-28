@@ -1,13 +1,12 @@
-package com.sparta.todo.service;
+package com.sparta.todo.todo.service;
 
-import com.sparta.todo.dto.requestDto.TodoSaveRequestDto;
-import com.sparta.todo.dto.requestDto.TodoUpdateRequestDto;
-import com.sparta.todo.dto.responseDto.TodoSaveResponseDto;
-import com.sparta.todo.dto.responseDto.TodoSimpleResponseDto;
-import com.sparta.todo.dto.responseDto.TodoUpdateResponseDto;
-import com.sparta.todo.entity.Todo;
-import com.sparta.todo.repository.TodoRepository;
-import lombok.Getter;
+import com.sparta.todo.todo.dto.requestDto.TodoSaveRequestDto;
+import com.sparta.todo.todo.dto.requestDto.TodoUpdateRequestDto;
+import com.sparta.todo.todo.dto.responseDto.TodoSaveResponseDto;
+import com.sparta.todo.todo.dto.responseDto.TodoSimpleResponseDto;
+import com.sparta.todo.todo.dto.responseDto.TodoUpdateResponseDto;
+import com.sparta.todo.todo.entity.Todo;
+import com.sparta.todo.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

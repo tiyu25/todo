@@ -1,8 +1,12 @@
-package com.sparta.todo.entity;
+package com.sparta.todo.todo.entity;
 
+import com.sparta.todo.comment.entity.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,6 +23,9 @@ public class Todo extends Timestamped {
 
     @Column(name = "todo_contents")
     private String todoContents;
+
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.REMOVE)
+    private List<Comment> comments = new ArrayList<>();
 
     public Todo(String userName, String todoTitle, String todoContents) {
         this.userName = userName;

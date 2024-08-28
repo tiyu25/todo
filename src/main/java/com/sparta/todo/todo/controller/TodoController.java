@@ -1,11 +1,11 @@
-package com.sparta.todo.controller;
+package com.sparta.todo.todo.controller;
 
-import com.sparta.todo.dto.requestDto.TodoSaveRequestDto;
-import com.sparta.todo.dto.requestDto.TodoUpdateRequestDto;
-import com.sparta.todo.dto.responseDto.TodoSaveResponseDto;
-import com.sparta.todo.dto.responseDto.TodoSimpleResponseDto;
-import com.sparta.todo.dto.responseDto.TodoUpdateResponseDto;
-import com.sparta.todo.service.TodoService;
+import com.sparta.todo.todo.dto.requestDto.TodoSaveRequestDto;
+import com.sparta.todo.todo.dto.requestDto.TodoUpdateRequestDto;
+import com.sparta.todo.todo.dto.responseDto.TodoSaveResponseDto;
+import com.sparta.todo.todo.dto.responseDto.TodoSimpleResponseDto;
+import com.sparta.todo.todo.dto.responseDto.TodoUpdateResponseDto;
+import com.sparta.todo.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

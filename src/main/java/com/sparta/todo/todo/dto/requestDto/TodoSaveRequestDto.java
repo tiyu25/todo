@@ -1,9 +1,9 @@
-package com.sparta.todo.dto.requestDto;
+package com.sparta.todo.todo.dto.requestDto;
 
 import lombok.Getter;
 
 @Getter
-public class TodoUpdateRequestDto {
+public class TodoSaveRequestDto {
     private String userName;
     private String todoTitle;
     private String todoContents;
