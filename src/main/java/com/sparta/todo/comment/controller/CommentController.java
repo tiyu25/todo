@@ -28,5 +28,10 @@ public class CommentController {
         return commentService.getComments();
     }
 
+    //댓글 단건 조회
+    @GetMapping("/todo/comment")
+    public ResponseEntity<CommentSimpleResponseDto> getComment(@RequestParam Long todoId, @RequestParam Long commentId) {
+        return ResponseEntity.ok(commentService.getComment(todoId, commentId));
+    }
 
 }

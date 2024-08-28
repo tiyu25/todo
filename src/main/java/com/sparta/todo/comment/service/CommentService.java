@@ -44,4 +44,12 @@ public class CommentService {
 
         return dtoList;
     }
+
+    //댓글 단건 조회
+    public CommentSimpleResponseDto getComment(Long todoId, Long commentId) {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
+
+        return new CommentSimpleResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents());
+    }
 }
