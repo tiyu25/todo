@@ -1,10 +1,13 @@
 package com.sparta.todo.service;
 
-import com.sparta.todo.dto.TodoSaveRequestDto;
-import com.sparta.todo.dto.TodoSaveResponseDto;
-import com.sparta.todo.dto.TodoSimpleResponseDto;
+import com.sparta.todo.dto.requestDto.TodoSaveRequestDto;
+import com.sparta.todo.dto.requestDto.TodoUpdateRequestDto;
+import com.sparta.todo.dto.responseDto.TodoSaveResponseDto;
+import com.sparta.todo.dto.responseDto.TodoSimpleResponseDto;
+import com.sparta.todo.dto.responseDto.TodoUpdateResponseDto;
 import com.sparta.todo.entity.Todo;
 import com.sparta.todo.repository.TodoRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,5 +48,14 @@ public class TodoService {
         Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
 
         return new TodoSimpleResponseDto(todo);
+    }
+
+    //일정 수정
+    @Transactional
+    public TodoUpdateResponseDto updateTodo(Long todoId, TodoUpdateRequestDto requestDto) {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+
+        todo.update(requestDto.getUserName(), requestDto.getTodoTitle(), requestDto.getTodoContents());
+        return new TodoUpdateResponseDto(todo.getId(), todo.getUserName(), todo.getTodoTitle(), todo.getTodoContents());
     }
 }

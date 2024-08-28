@@ -1,11 +1,12 @@
 package com.sparta.todo.controller;
 
-import com.sparta.todo.dto.TodoSaveRequestDto;
-import com.sparta.todo.dto.TodoSaveResponseDto;
-import com.sparta.todo.dto.TodoSimpleResponseDto;
+import com.sparta.todo.dto.requestDto.TodoSaveRequestDto;
+import com.sparta.todo.dto.requestDto.TodoUpdateRequestDto;
+import com.sparta.todo.dto.responseDto.TodoSaveResponseDto;
+import com.sparta.todo.dto.responseDto.TodoSimpleResponseDto;
+import com.sparta.todo.dto.responseDto.TodoUpdateResponseDto;
 import com.sparta.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,12 @@ public class TodoController {
     @GetMapping("/param")
     public ResponseEntity<TodoSimpleResponseDto> getTodo(@RequestParam Long todoId) {
         return ResponseEntity.ok(todoService.getTodo(todoId));
+    }
+
+    //일정 수정
+    @PutMapping("/param")
+    public ResponseEntity<TodoUpdateResponseDto> updateTodo(@RequestParam Long todoId, @RequestBody TodoUpdateRequestDto requestDto) {
+        return ResponseEntity.ok(todoService.updateTodo(todoId, requestDto));
     }
 
 }

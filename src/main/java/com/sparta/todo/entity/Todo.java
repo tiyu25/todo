@@ -25,4 +25,10 @@ public class Todo extends Timestamped {
         this.todoTitle = todoTitle;
         this.todoContents = todoContents;
     }
+
+    public void update(String userName, String todoTitle, String todoContents) {
+        this.userName = userName;
+        this.todoTitle = todoTitle;
+        this.todoContents = todoContents;
+    }
 }

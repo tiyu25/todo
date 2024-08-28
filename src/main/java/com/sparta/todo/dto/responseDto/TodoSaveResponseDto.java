@@ -1,8 +1,6 @@
-package com.sparta.todo.dto;
+package com.sparta.todo.dto.responseDto;
 
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class TodoSaveResponseDto {
