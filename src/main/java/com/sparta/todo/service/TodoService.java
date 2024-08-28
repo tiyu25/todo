@@ -39,4 +39,11 @@ public class TodoService {
 
         return dtoList;
     }
+
+    //일정 단건 조회
+    public TodoSimpleResponseDto getTodo(Long todoId) {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+
+        return new TodoSimpleResponseDto(todo);
+    }
 }

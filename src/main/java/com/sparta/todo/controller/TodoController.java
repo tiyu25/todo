@@ -29,4 +29,10 @@ public class TodoController {
         return todoService.getTodos();
     }
 
+    //일정 단건 조회
+    @GetMapping("/param")
+    public ResponseEntity<TodoSimpleResponseDto> getTodo(@RequestParam Long todoId) {
+        return ResponseEntity.ok(todoService.getTodo(todoId));
+    }
+
 }
