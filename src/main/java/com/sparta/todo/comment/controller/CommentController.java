@@ -1,12 +1,15 @@
 package com.sparta.todo.comment.controller;
 
-import com.sparta.todo.comment.dto.CommentSaveRequestDto;
-import com.sparta.todo.comment.dto.CommentSaveResponseDto;
-import com.sparta.todo.comment.dto.CommentSimpleResponseDto;
+import com.sparta.todo.comment.dto.*;
 import com.sparta.todo.comment.service.CommentService;
+import com.sparta.todo.todo.dto.requestDto.TodoUpdateRequestDto;
+import com.sparta.todo.todo.dto.responseDto.TodoUpdateResponseDto;
+import com.sparta.todo.todo.entity.Todo;
+import com.sparta.todo.todo.repository.TodoRepository;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
+    private final TodoRepository todoRepository;
 
     //댓글 등록
     @PostMapping("/todo/comment")
@@ -32,6 +36,12 @@ public class CommentController {
     @GetMapping("/todo/comment")
     public ResponseEntity<CommentSimpleResponseDto> getComment(@RequestParam Long todoId, @RequestParam Long commentId) {
         return ResponseEntity.ok(commentService.getComment(todoId, commentId));
+    }
+
+    //댓글 수정
+    @PutMapping("/todo/comment")
+    public ResponseEntity<CommentUpdateResponseDto> updateComment(@RequestParam Long todoId, @RequestParam Long commentId, @RequestBody CommentUpdateRequestDto requestDto) {
+        return ResponseEntity.ok(commentService.updateComment(todoId, commentId, requestDto));
     }
 
 }

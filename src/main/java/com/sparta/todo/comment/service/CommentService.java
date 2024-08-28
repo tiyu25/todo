@@ -1,8 +1,6 @@
 package com.sparta.todo.comment.service;
 
-import com.sparta.todo.comment.dto.CommentSaveRequestDto;
-import com.sparta.todo.comment.dto.CommentSaveResponseDto;
-import com.sparta.todo.comment.dto.CommentSimpleResponseDto;
+import com.sparta.todo.comment.dto.*;
 import com.sparta.todo.comment.entity.Comment;
 import com.sparta.todo.comment.repository.CommentRepository;
 import com.sparta.todo.todo.entity.Todo;
@@ -47,9 +45,20 @@ public class CommentService {
 
     //댓글 단건 조회
     public CommentSimpleResponseDto getComment(Long todoId, Long commentId) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+//        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
         return new CommentSimpleResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents());
+    }
+
+    //댓글 수정
+    @Transactional
+    public CommentUpdateResponseDto updateComment(Long todoId, Long commentId, CommentUpdateRequestDto requestDto) {
+//         Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
+
+        comment.update(requestDto.getUserName(), requestDto.getCommentContents());
+
+        return new CommentUpdateResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents());
     }
 }
