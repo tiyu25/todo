@@ -2,14 +2,9 @@ package com.sparta.todo.comment.controller;
 
 import com.sparta.todo.comment.dto.*;
 import com.sparta.todo.comment.service.CommentService;
-import com.sparta.todo.todo.dto.requestDto.TodoUpdateRequestDto;
-import com.sparta.todo.todo.dto.responseDto.TodoUpdateResponseDto;
-import com.sparta.todo.todo.entity.Todo;
 import com.sparta.todo.todo.repository.TodoRepository;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +37,12 @@ public class CommentController {
     @PutMapping("/todo/comment")
     public ResponseEntity<CommentUpdateResponseDto> updateComment(@RequestParam Long todoId, @RequestParam Long commentId, @RequestBody CommentUpdateRequestDto requestDto) {
         return ResponseEntity.ok(commentService.updateComment(todoId, commentId, requestDto));
+    }
+
+    //댓글 삭제
+    @DeleteMapping("/todo/comment")
+    public void deleteComment(@RequestParam Long todoId, @RequestParam Long commentId) {
+        commentService.deleteComment(todoId, commentId);
     }
 
 }

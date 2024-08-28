@@ -15,11 +15,20 @@ public abstract class Timestamped {
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column(name = "updated_date")
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime updatedDate;
+
+    @PrePersist
+    public void onPrePersist() {
+        this.createdDate = LocalDateTime.now();
+        this.updatedDate = this.createdDate;
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.updatedDate = LocalDateTime.now();
+    }
 }

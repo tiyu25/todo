@@ -1,5 +1,7 @@
 package com.sparta.todo.todo.service;
 
+import com.sparta.todo.comment.dto.CommentSimpleResponseDto;
+import com.sparta.todo.comment.entity.Comment;
 import com.sparta.todo.todo.dto.requestDto.TodoSaveRequestDto;
 import com.sparta.todo.todo.dto.requestDto.TodoUpdateRequestDto;
 import com.sparta.todo.todo.dto.responseDto.TodoSaveResponseDto;
@@ -31,14 +33,29 @@ public class TodoService {
 
     //일정 전체 조회
     public List<TodoSimpleResponseDto> getTodos() {
-        List<Todo> todos = todoRepository.findAll();
+        List<Todo> todoList = todoRepository.findAll();
 
         List<TodoSimpleResponseDto> dtoList = new ArrayList<>();
-        for (Todo todo : todos ) {
-            TodoSimpleResponseDto dto = new TodoSimpleResponseDto(todo);
+        for (Todo todo : todoList ) {
+            List<Comment> commentList = todo.getComments();
+            List<CommentSimpleResponseDto> commentDtoList = new ArrayList<>();
+
+            for (Comment comment : commentList) {
+                commentDtoList.add(new CommentSimpleResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents(), comment.getCreatedDate(), comment.getUpdatedDate()));
+            }
+
+            TodoSimpleResponseDto dto = new TodoSimpleResponseDto(
+                    todo.getId(),
+                    todo.getUserName(),
+                    todo.getTodoTitle(),
+                    todo.getTodoContents(),
+                    todo.getCreatedDate(),
+                    todo.getUpdatedDate(),
+                    commentList
+            );
+
             dtoList.add(dto);
         }
-
         return dtoList;
     }
 

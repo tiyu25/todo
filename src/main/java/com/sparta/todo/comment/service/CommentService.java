@@ -37,7 +37,14 @@ public class CommentService {
 
         List<CommentSimpleResponseDto> dtoList = new ArrayList<>();
         for(Comment comment : commentList) {
-            dtoList.add(new CommentSimpleResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents()));
+            dtoList.add(new CommentSimpleResponseDto(
+                                comment.getId(),
+                                comment.getUserName(),
+                                comment.getCommentContents(),
+                                comment.getCreatedDate(),
+                                comment.getUpdatedDate()
+                            )
+                        );
         }
 
         return dtoList;
@@ -45,20 +52,40 @@ public class CommentService {
 
     //댓글 단건 조회
     public CommentSimpleResponseDto getComment(Long todoId, Long commentId) {
-//        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
-        return new CommentSimpleResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents());
+        return new CommentSimpleResponseDto(
+                comment.getId(),
+                comment.getUserName(),
+                comment.getCommentContents(),
+                comment.getCreatedDate(),
+                comment.getCreatedDate()
+        );
     }
 
     //댓글 수정
     @Transactional
     public CommentUpdateResponseDto updateComment(Long todoId, Long commentId, CommentUpdateRequestDto requestDto) {
-//         Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
+        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정이 존재하지 않습니다."));
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new NullPointerException("해당 댓글이 존재하지 않습니다."));
 
         comment.update(requestDto.getUserName(), requestDto.getCommentContents());
 
         return new CommentUpdateResponseDto(comment.getId(), comment.getUserName(), comment.getCommentContents());
     }
+
+    //댓글 삭제
+    @Transactional
+    public void deleteComment(Long todoId, Long commentId) {
+        if (!commentRepository.existsById(commentId)) {
+            throw new NullPointerException("해당 댓글이 없습니다.");
+        }
+        if (!commentRepository.existsById(todoId)) {
+            throw new NullPointerException("해당 일정이 없습니다.");
+        }
+
+        commentRepository.deleteById(commentId);
+    }
+
 }
